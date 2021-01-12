@@ -12,10 +12,17 @@
     };
 
     let url = window.location.href;
+    let uid = "";
 
     function init(){
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
+
+        firebase.auth().onAuthStateChanged((user) => {
+            if(user){
+                uid = user.uid;
+            }
+        })
 
         let temp = url.split("uid=");
         url = temp[1];
@@ -35,7 +42,7 @@
             }else{
                 $("#noComments").css("display", "none");
                 $(".comments").css("height", "700px");
-                for(i in data.Comments){
+                for(i in data.Comments){              
                     let div = document.createElement("div");
                     div.classList.add("col");
                     div.classList.add("m12");
@@ -56,18 +63,50 @@
                     div.appendChild(comment);
 
                     let upvoteBtn = document.createElement("button");
-                    upvoteBtn.textContent = "Upvote It!"
+                    upvoteBtn.id = i + "upvote";
                     upvoteBtn.classList.add("col");
                     upvoteBtn.classList.add("m2");
                     upvoteBtn.classList.add("upvoteBtn");
                     div.appendChild(upvoteBtn);
 
-                    let upvotes = document.createElement("p");
+                    let icon = document.createElement("i");
+                    icon.id = i + "icon";
+                    icon.textContent = "arrow_drop_up";
+                    icon.classList.add("material-icons");
+                    icon.classList.add("medium");
+                    icon.classList.add("left-align")
+                    upvoteBtn.appendChild(icon);
+
+                    // holds the uid of the current comment that variable I holds so that the uid can be accessed in the below call to firebase
+                    let temp = i;
+
+                    firebase.database().ref("Users/Teachers/" + uid + "/Posts/CommentUpvotes").on("child_added", (snapshot) => {
+                        let data = snapshot.val();
+                        if(data.CommentUID === temp){
+                            upvoteBtn.disabled = true;
+                            $(icon).css("color", "#EA5566");
+                        }
+                    })
+
+                    let upvotes = document.createElement("span");
+                    upvotes.id = i + "span";
                     upvotes.textContent = data.Comments[i].Upvotes;
-                    upvotes.classList.add("col");
-                    upvotes.classList.add("m1");
                     upvotes.classList.add("upvotes");
-                    div.appendChild(upvotes);
+                    upvoteBtn.appendChild(upvotes);
+
+                    let replyBtn = document.createElement("button");
+                    replyBtn.id = i + "reply";
+                    replyBtn.classList.add("col");
+                    replyBtn.classList.add("m1");
+                    replyBtn.classList.add("replyBtn");
+                    div.appendChild(replyBtn);
+
+                    let replyIcon = document.createElement("i");
+                    replyIcon.textContent = "chat_bubble_outline";
+                    replyIcon.classList.add("material-icons");
+                    replyIcon.classList.add("small");
+                    replyIcon.classList.add("left-align")
+                    replyBtn.appendChild(replyIcon);
 
                     $(".comments").append(div);
                 }
@@ -94,16 +133,39 @@
             }
         });
 
+        $(document.body).on("click", ".upvoteBtn", upvote);
         $("#makeComment").on("click", makeComment);
         $("#logout").on("click", logout);
+    }
+
+    function upvote(){
+        let id = $(this).attr("id");
+        let temp = id.split("upvote");
+        id = temp[0];
+
+        $("#" + id + "icon").css("color", "#EA5566");
+        this.disabled = true;
+
+        firebase.database().ref("Posts/" + url + "/Comments/" + id).child("Upvotes").transaction((Upvotes) => {
+            Upvotes = Upvotes + 1;
+            $("#" + id + "span").text(Upvotes);
+            $(".comments").empty();
+            $(".tags").empty();
+            return Upvotes;
+        }).then(() => {
+            firebase.database().ref("Users/Teachers/" + uid + "/Posts/CommentUpvotes").push({
+                CommentUID:id
+            })
+        })
     }
 
     function makeComment(){
         let comment = $("#comment").val();
         $(".comments").empty();
+        $(".tags").empty();
         firebase.auth().onAuthStateChanged((user) => {
             if(user){
-                let uid = user.uid;
+                uid = user.uid;
                 firebase.database().ref("Users/Teachers/" + uid + "/Info").on("value", (snapshot) => {
                     let data = snapshot.val();
                     let key = firebase.database().ref("Posts/" + url + "/Comments").push().getKey();

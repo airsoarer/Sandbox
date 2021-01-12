@@ -20,6 +20,7 @@ body {
 #comment {
     height: 200px;
     margin-top: 5px;
+    font-size: 18px !important;
 }
 
 #comment:active, #comment:focus {
@@ -130,12 +131,49 @@ body {
     height: 40px;
     margin-bottom: 12px;
     border: none;
-    margin-left: 11px !important;
+    /* margin-left: 11px !important; */
     font-size: 18px;
+    background-color: transparent;
+    /* padding: 0px !important; */
 }
 
-.upvotes {
+.upvoteBtn:active, .upvoteBtn:focus {
+    background-color: transparent !important;
+}
+
+.upvoteBtn i {
+    color: grey;
+    margin-top: -10px;;
+    text-align: left !important;
+}
+
+.upvoteBtn i:hover {
+    color: #EA5566;
+    transition-duration: .2s;
+}
+
+.upvoteBtn span {
     font-size: 25px;
     margin: 0px !important;
+    vertical-align: top;
+}
+
+.replyBtn {
+    border: none;
+    background-color: transparent;
+}
+
+.replyBtn:active, .replyBtn:focus {
+    background-color: transparent !important;
+}
+
+.replyBtn i {
+    color: grey;
+
+}
+
+.replyBtn i:hover {
+    color: #EA5566;
+    transition-duration: .2s;
 }
 
