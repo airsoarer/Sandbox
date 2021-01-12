@@ -1,0 +1,169 @@
+body {
+    --base: #ffffff;
+    --main: #EA5566;
+    --accentOne: #6B474B;
+    --accentTwo: #EE9DA7;
+    --accentThree: #6B272F;
+
+    font-family: 'Quicksand', sans-serif;
+    font-family: 'Raleway', sans-serif;
+
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+@keyframes underline {
+    0% {
+        border-width: 0px;
+    }
+
+    50% {
+        border-width: 50%;
+    }
+
+    100% {
+        /* border-bottom: solid 2px #EA5566; */
+        border-width: 100%;
+    }
+}
+
+::-webkit-scrollbar {
+    height: 5px;
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 5px 6px #8f8f8f;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #EA5566;
+}
+
+a::after {
+    content: " ";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #EA5566;
+    transition: width .5s;
+}
+
+a:hover::after {
+    /* width: 100%; */
+    width: 100%;
+}
+
+footer {
+    height: 400px;
+    background-color: #8f8f8f;
+    margin-bottom: 0px !important;
+    color: white;;
+}
+
+footer a {
+    color: white;
+    font-size: 16px;
+}
+
+footer a:hover {
+    color: var(--main);
+    transition-duration: .5s;
+}
+
+p {
+    font-size: 16px;
+}
+
+input[type="text"] {
+    padding-left: 20px !important;;
+}
+
+textarea {
+    padding-top: 10px !important;
+    padding-left: 10px !important;
+}
+
+button {
+    font-weight: 200;
+}
+
+#color {
+    color: var(--main);
+}
+
+#title {
+    color: var(--main);
+    font-weight: 900
+}
+
+.wrapper {
+    margin-bottom: 0px !important;
+}
+
+.nav {
+    height: 100px;
+}
+
+.nav ul {
+    margin: 0px;
+}
+
+.nav li a {
+    font-size: 24px !important;
+    padding-top: 200px !important;
+    height: 100%;
+    color: black;
+    text-align: center;
+}
+
+.headImage {
+    height: 400px !important;
+    background-size: contain;
+}
+
+.headImage img {
+    height: 400px !important;
+    background-size: cover;
+    padding: 0px
+}
+
+.info {
+    margin-bottom: 100px;
+}
+
+.info img {
+    margin-top: 40px !important;
+}
+
+.teacher {
+    height: 500px !important;
+    margin-bottom: 50px;
+}
+
+.teacher img {
+    width: 200px !important;
+}
+
+.signup {
+    height: 400px;
+    background-color: #EA5566;
+    color: white;
+    margin-bottom: 0px;
+}
+
+.signup a:hover {
+    background-color: white;
+    color: var(--main);
+    transition-duration: .5s;
+}
+
+.signup a {
+    font-size: 24px;
+    color: white;
+    border: solid white 2px; 
+    height: 60px;
+    padding-top: 8px !important;
+    margin-top: 50px !important;
+}
+

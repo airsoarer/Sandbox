@@ -1,0 +1,190 @@
+input {
+    /* border: solid 1px grey !important; */
+    height: 75px !important;
+
+    background-color: white;
+    color: black;
+    transition-duration: .5s;
+    box-shadow: 1px 2px 5px #8f8f8f !important;
+}
+
+#search {
+    margin-top: 100px;
+}
+
+#postSearch {
+    background-color: #EA5566;
+    color: white;
+    transition-duration: .5s;
+    box-shadow: 1px 10px 5px #8f8f8f;
+}
+
+.nav ul li a {
+    font-size: 22px !important;
+}
+
+.nav ul li button {
+    border: none;
+    background-color: transparent;
+    font-size: 22px;
+    font-weight: 200;
+    margin-top: 2px;
+}
+
+.nav ul li button::after {
+    content: " ";
+    margin-top: 6px !important;
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #EA5566;
+    transition: width .5s;
+}
+
+.nav ul li button:hover::after {
+    /* width: 100%; */
+    width: 100%;
+}
+
+.searchType {
+    height: 75px;
+    margin-top: 100px;
+    border: none;
+    background-color: transparent;
+    font-size: 24px;
+
+    background-color: white;
+    color: black;
+    transition-duration: .5s;
+    box-shadow: 1px 2px 5px #8f8f8f;
+}
+
+.searchType:hover {
+    background-color: #EA5566;
+    color: white;
+    transition-duration: .5s;
+    box-shadow: 1px 10px 5px #8f8f8f;
+}
+
+.temp {
+    width: 100%;
+    margin-top: 30px !important;
+    display: inline-flex;
+}
+
+.tags {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: 80px;
+    white-space:nowrap;
+    width: 65%;
+    margin-left: 8%;
+    padding-top: 20px !important;
+    display: inline-block
+}
+
+.add {
+    display: inline-block;
+    width: 250px;
+    font-size: 18px;
+    margin-left: 40px;
+    text-align: center;
+}
+
+.add a {
+    color: black;
+    text-align: center !important;
+    margin-top: 28px;
+    font-size: 24px;
+    font-weight: 900 !important;
+    width: 250 !important;
+    display: inline-block
+}
+
+.tags::-webkit-scrollbar {
+    display: none;
+}
+
+.tags button {
+    margin: 0px !important;
+}
+
+.tag {
+    height: 50px;
+    color: black;
+    font-size: 20px;
+    border: none;
+    width: 200px;
+    margin-left: 20px;
+
+    background-color: white;
+    color: black;
+    transition-duration: .5s;
+    box-shadow: 1px 2px 5px #8f8f8f;
+}
+
+.tag:hover {
+    background-color: #EA5566;
+    color: white;
+    transition-duration: .5s;
+    box-shadow: 1px 4px 5px #8f8f8f;
+}
+
+.postDiv {
+    box-shadow: 1px 4px 5px #8f8f8f;
+    margin-bottom: 50px;
+    padding-bottom: 25px !important;
+    padding-top: 10px !important;
+    border-left: solid 7px #EA5566;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.author {
+    margin-top: 0px;
+}
+
+.postDiv a {
+    margin-bottom: 1px;
+}
+
+.discussions {
+    margin-top: 40px;
+}
+
+.tagDiv {
+    background-color: #8f8f8f;
+    color: white;
+    text-align: center;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.tagDiv p {
+    font-size: 18px;
+    font-weight: 800 !important;
+    margin-top: 7px !important;
+}
+
+.postTitle {
+    font-size: 38px;
+    color: #000000DE;
+    font-weight: 100 !important;
+    border: none;
+}
+
+.postTitle:hover {
+    transition-duration: .2s;
+    color: #EA5566;
+}
+
+.postTitle::after {
+    background-color: none;
+    content: none;
+    height: 0px;
+}
+
+.tagContainer {
+    margin-top: 10px;
+}
+

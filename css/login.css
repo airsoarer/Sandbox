@@ -1,0 +1,107 @@
+button img {
+    height: 60px;
+    padding-right: 20px;
+}
+
+footer {
+    background-color: #ae5566;
+}
+
+#wrongPass, #emailNotFound {
+    color: red;
+    display: none;
+}
+
+#teacher {
+    background-color: #ea5566;
+    color: white;
+    transition-duration: .5s;
+    box-shadow: 1px 10px 5px #8f8f8f;
+}
+
+#google, #studentGoogle {
+    height: 80px;
+    background-color: transparent;
+    margin-top: 60px;
+    border: none;
+    padding-top: 5px;
+    box-shadow: 1px 2px 5px #8f8f8f;
+}
+
+#google img {
+    width: 80px !important;
+}
+
+#studentGoogle:hover, #google:hover {
+    transition-duration: .5s;
+    box-shadow: 1px 10px 5px #8f8f8f;
+}
+
+.student {
+    display: none;
+    margin-bottom: 100px;
+}
+
+.login {
+    padding-bottom: 60px;
+    margin-top: 30px;
+}
+
+.loginType {
+    margin-top: 50px;
+}
+
+.email {
+    border-right: 2px solid black;
+    padding-right: 50px !important;
+}
+
+.input {
+    padding-bottom: 100px !important;
+}
+
+.google img {
+    height: 60px;
+    margin-right: 10px;
+}
+
+.google h4 {
+    margin-bottom: 0px !important;
+}
+
+.type {
+    background-color: transparent;
+    color: black;
+    height: 50px;
+    border: none;
+    font-size: 18px;
+    /* border: solid 2px black; */
+    box-shadow: 1px 2px 5px #8f8f8f;
+}
+
+.type:hover {
+    background-color: #ea5566;
+    color: white;
+    transition-duration: .5s;
+    box-shadow: 1px 10px 5px #8f8f8f;
+}
+
+.input {
+    margin-top: 50px;
+    height: 400px;
+}
+
+.email button {
+    background: transparent;
+    height: 50px;
+    border: none;
+    box-shadow: 1px 2px 5px #8f8f8f;
+}
+
+.email button:hover {
+    background-color: #ea5566;
+    color: white;
+    transition-duration: .5s;
+    box-shadow: 1px 10px 5px #8f8f8f;
+}
+
