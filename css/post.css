@@ -101,6 +101,7 @@ body {
     /* height: 700px; */
     overflow-x: hidden;
     overflow-y: scroll;
+    padding-bottom: 10px;
 }
 
 .comments::-webkit-scrollbar {
@@ -175,5 +176,37 @@ body {
 .replyBtn i:hover {
     color: #EA5566;
     transition-duration: .2s;
+}
+
+.replyInput {
+    border-bottom: none !important;
+    display: none;
+}
+
+.replyInput::placeholder {
+    font-weight: 200 !important;
+    font-size: 18px;
+}
+
+.replyInput:active, .replyInput:focus {
+    border-bottom: none !important;
+    border-color: transparent !important;
+}
+
+.responseDiv {
+    padding-left: 50px !important;
+    /* display: none; */
+}
+
+.responseName {
+    margin-bottom: 0px !important;
+}
+
+.response {
+    margin-top: 0px !important;
+}
+
+.responseDivContainer {
+    display: none;
 }
 

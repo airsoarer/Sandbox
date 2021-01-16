@@ -62,6 +62,8 @@
                     comment.classList.add("comment");
                     div.appendChild(comment);
 
+                    // ===============================================
+
                     let upvoteBtn = document.createElement("button");
                     upvoteBtn.id = i + "upvote";
                     upvoteBtn.classList.add("col");
@@ -94,6 +96,8 @@
                     upvotes.classList.add("upvotes");
                     upvoteBtn.appendChild(upvotes);
 
+                    // ==============================================
+
                     let replyBtn = document.createElement("button");
                     replyBtn.id = i + "reply";
                     replyBtn.classList.add("col");
@@ -107,6 +111,52 @@
                     replyIcon.classList.add("small");
                     replyIcon.classList.add("left-align")
                     replyBtn.appendChild(replyIcon);
+
+                    // =====================================================
+
+                    let responseDivContainer = document.createElement("div");
+                    responseDivContainer.id = i + "responseDivContainer";
+                    responseDivContainer.classList.add("col");
+                    responseDivContainer.classList.add("m12");
+                    responseDivContainer.classList.add("responseDivContainer");
+                    div.appendChild(responseDivContainer);
+
+                    if(data.Comments[i].Responses != undefined){
+                        console.log("working");
+                        for(x in data.Comments[i].Responses){
+                            let responseDiv = document.createElement("div");
+                            responseDiv.id = i + "responseDiv";
+                            responseDiv.classList.add("col");
+                            responseDiv.classList.add("m12");
+                            responseDiv.classList.add("responseDiv");
+
+                            let responseName = document.createElement("p");
+                            responseName.textContent = data.Comments[i].Responses[x].ResponderFirstName + " " + data.Comments[i].Responses[x].ResponderLastName;
+                            responseName.classList.add("col");
+                            responseName.classList.add("m12");
+                            responseName.classList.add("responseName");
+                            responseDiv.appendChild(responseName);
+
+                            let response = document.createElement("p");
+                            response.textContent = data.Comments[i].Responses[x].ResponderComment;
+                            response.classList.add("col");
+                            response.classList.add("m12");
+                            response.classList.add("response");
+                            responseDiv.appendChild(response);
+
+                            responseDivContainer.appendChild(responseDiv);
+                        }
+                    }
+
+                    // ======================================================
+
+                    let replyInput = document.createElement("input");
+                    replyInput.id = i + "replyInput";
+                    $(replyInput).attr("placeholder", "Reply Here:");
+                    replyInput.classList.add("col");
+                    replyInput.classList.add("m12");
+                    replyInput.classList.add("replyInput");
+                    div.appendChild(replyInput);
 
                     $(".comments").append(div);
                 }
@@ -134,8 +184,37 @@
         });
 
         $(document.body).on("click", ".upvoteBtn", upvote);
+        $(document.body).on("click", ".replyBtn", reply);
         $("#makeComment").on("click", makeComment);
         $("#logout").on("click", logout);
+    }
+
+    function reply(){
+        let id = $(this).attr("id");
+        let temp = id.split("reply");
+        id = temp[0];
+
+        $("#" + id + "replyInput").css("display", "block");
+        $("#" + id +"responseDivContainer").css("display", "block");
+        $("#" + id + "replyInput").keyup((e) => {
+            if(e.keyCode === 13){
+                let comment = $("#" + id + "replyInput").val();
+                $(".comments").empty();
+                $(".tags").empty();
+                firebase.database().ref("Users/Teachers/" + uid + "/Info").on("value", (snapshot) => {
+                    let data = snapshot.val();
+                    firebase.database().ref("Posts/" + url + "/Comments/" + id + "/Responses").push({
+                        ResponderUID:uid,
+                        ResponderComment:comment,
+                        ResponderFirstName:data.FirstName,
+                        ResponderLastName:data.LastName
+                    }).then(() => {
+                        $("#" + id + "replyInput").val(" ");
+                        $("#" + id + "replyInput").css("display", "none");
+                    })
+                });
+            }
+        })
     }
 
     function upvote(){
