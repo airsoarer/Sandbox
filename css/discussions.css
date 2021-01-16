@@ -178,6 +178,10 @@ input {
     color: #EA5566;
 }
 
+.questionTitle:hover {
+    color: #6B474B;
+}
+
 .postTitle::after {
     background-color: none;
     content: none;
@@ -186,5 +190,9 @@ input {
 
 .tagContainer {
     margin-top: 10px;
+}
+
+.questions {
+    display: none;
 }
 
