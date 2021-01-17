@@ -37,7 +37,7 @@
             $("#description").text(data.Description);
 
             $("#datePosted").text("Date Posted: " + data.CreationDate);
-            $("#Views").text("Views: " + data.Views);
+            $("#views").text("Views: " + data.Views);
 
             if(data.Comments === undefined){
                 $("#noComments").css("display", "block");

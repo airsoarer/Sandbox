@@ -166,14 +166,20 @@ input {
     margin-top: 7px !important;
 }
 
-.postTitle {
+.postTitle, .questionTitle {
     font-size: 38px;
     color: #000000DE;
     font-weight: 100 !important;
     border: none;
+    text-align: left;
+    background-color: transparent;
 }
 
-.postTitle:hover {
+.postTitle:active, .postTitle:focus, .questionTitle:active, .questionTitle:focus {
+    background-color: transparent;
+}
+
+.postTitle:hover, .questionTitle:hover {
     transition-duration: .2s;
     color: #EA5566;
 }
@@ -182,7 +188,7 @@ input {
     color: #6B474B;
 }
 
-.postTitle::after {
+.postTitle::after, .questionTitle::after {
     background-color: none;
     content: none;
     height: 0px;

@@ -35,7 +35,7 @@
             $("#description").text(data.Description);
 
             $("#datePosted").text("Date Posted: " + data.CreationDate);
-            $("#Views").text("Views: " + data.Views);
+            $("#views").text("Views: " + data.Views);
 
             if(data.Comments === undefined){
                 $("#noComments").css("display", "block");
@@ -122,7 +122,6 @@
                     div.appendChild(responseDivContainer);
 
                     if(data.Comments[i].Responses != undefined){
-                        console.log("working");
                         for(x in data.Comments[i].Responses){
                             let responseDiv = document.createElement("div");
                             responseDiv.id = i + "responseDiv";
