@@ -2,6 +2,10 @@ footer {
     background-color: #ae5566;
 }
 
-.pictures {
-    height: 300px;
+#color {
+    color: #ae5566 !important;
 }
+
+/* .pictures {
+    height: 500px;
+} */

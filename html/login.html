@@ -9,20 +9,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Raleway:wght@200&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../css/home.css">
     <link rel="stylesheet" href="../css/login.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="../js/home.js"></script>
     <script src="../js/login.js"></script>
 </head>
 <body>
     <div class="wrapper">
-        <div class="row nav center-align">
+        <ul id="slide-out" class="sidenav">
+            <li class="col s12" style="padding-left: 20px;" id="title"><h2>SANDBOX</h2></li>
+            <li class="col s12"><a href="home.html">Home</a></li>
+            <li class="col s12"><a href="about.html">About</a></li>
+            <li class="col s12"><a href="testamonials.html">Testamonials</a></li>
+            <li class="col s12"><a href="login.html">Login</a></li>
+            <li class="col s12"><a href="signup.html">Sign Up</a></li>
+        </ul>
+        <button id="sidenav" data-target="slide-out" class="col s1 offset-s1 sidenav-trigger hide-on-med-and-up"><i class="material-icons small">menu</i></button>
+        <div class="row nav hide-on-small-only center-align">
             <ul>
                 <li class="col m4 offset-m1 left-align" id="title"><h2>SANDBOX</h2></li>
                 <li class="col m1" style="padding-top: 48px"><a href="home.html">Home</a></li>
@@ -33,9 +43,9 @@
             </ul>
         </div>
         <div class="row login">
-            <h2 class="col m10 offset-m1">Login</h2>
-            <div class="col m10 offset-m1 input teacher">
-                <div class="col m6 email">
+            <h2 class="col s12 m10 offset-m1">Login</h2>
+            <div class="col s12 m10 offset-m1 input teacher">
+                <div class="col s12 m6 email">
                     <h4>Login with Email</h4>
                     <br>
                     <input placeholder="Email" type="text" id="email">
@@ -43,19 +53,19 @@
                     <input placeholder="Password" type="password" id="pass">
                     <span id="wrongPass">Incorrect Password, please try again</span>
                     <br><br>
-                    <button class="col m4" id="login">Login</button>
+                    <button class="col s10 offset-s1 m4" id="login">Login</button>
                 </div>
-                <div class="col m6 google">
+                <div class="col s12 m6 google">
                     <h4>Login with Google</h4>
                     <!-- <img class="col m2 offset-m1" src="../images/google.png" alt=""> -->
-                    <button class="col m10 offset-m1" id="google"><img src="../images/google.png" alt=""></button>
+                    <button class="col s10 offset-s1 m10 offset-m1" id="google"><img src="../images/google.png" alt=""></button>
                 </div>
             </div>
         </div>
     </div>
     <footer class="row">
-        <h2 class="col m10 offset-m1">SANDBOX</h2>
-        <div class="col m4 offset-m1 lowerNav">
+        <h2 class="col s12 m10 offset-m1">SANDBOX</h2>
+        <div class="col s12 m4 offset-m1 lowerNav">
             <h4>Navigation</h4>
             <ul>
                 <li><a href="home.html">Home</a></li>

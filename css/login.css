@@ -7,6 +7,16 @@ footer {
     background-color: #ae5566;
 }
 
+@media screen and (max-width: 601px){
+    .google {
+        margin-top: 80px;
+    }
+
+    .login h2 {
+        margin-top: 0px !important;
+    }
+}
+
 #wrongPass, #emailNotFound {
     color: red;
     display: none;

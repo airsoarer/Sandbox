@@ -167,3 +167,24 @@ button {
     margin-top: 50px !important;
 }
 
+#sidenav {
+    border: none;
+    background-color: transparent;
+}
+
+#sidenav:active, #sidenav:focus {
+    background-color: none;;
+}
+
+.sidenav-trigger i {
+    color:black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.sidenav-trigger i:hover {
+    color: var(--main);
+    border-color: transparent;
+    transition-duration: .2s;
+}
+
