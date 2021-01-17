@@ -173,7 +173,7 @@ button {
 }
 
 #sidenav:active, #sidenav:focus {
-    background-color: none;;
+    background-color: none;
 }
 
 .sidenav-trigger i {
