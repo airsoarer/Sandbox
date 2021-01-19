@@ -45,12 +45,14 @@
                 for(i in data.Comments){              
                     let div = document.createElement("div");
                     div.classList.add("col");
+                    div.classList.add("s12");
                     div.classList.add("m12");
                     div.classList.add("commentBox");
 
                     let name = document.createElement("p");
                     name.textContent = data.Comments[i].CommenterFirstName + " " + data.Comments[i].CommenterLastName;
                     name.classList.add("col");
+                    name.classList.add("s12");
                     name.classList.add("m12");
                     name.classList.add("name");
                     div.appendChild(name);
@@ -58,6 +60,7 @@
                     let comment = document.createElement("p");
                     comment.textContent = data.Comments[i].Comment;
                     comment.classList.add("col");
+                    comment.classList.add("s12");
                     comment.classList.add("m12");
                     comment.classList.add("comment");
                     div.appendChild(comment);
@@ -67,6 +70,7 @@
                     let upvoteBtn = document.createElement("button");
                     upvoteBtn.id = i + "upvote";
                     upvoteBtn.classList.add("col");
+                    upvoteBtn.classList.add("s4");
                     upvoteBtn.classList.add("m2");
                     upvoteBtn.classList.add("upvoteBtn");
                     div.appendChild(upvoteBtn);
@@ -101,6 +105,7 @@
                     let replyBtn = document.createElement("button");
                     replyBtn.id = i + "reply";
                     replyBtn.classList.add("col");
+                    replyBtn.classList.add("s2");
                     replyBtn.classList.add("m1");
                     replyBtn.classList.add("replyBtn");
                     div.appendChild(replyBtn);
@@ -117,6 +122,7 @@
                     let responseDivContainer = document.createElement("div");
                     responseDivContainer.id = i + "responseDivContainer";
                     responseDivContainer.classList.add("col");
+                    responseDivContainer.classList.add("s12");
                     responseDivContainer.classList.add("m12");
                     responseDivContainer.classList.add("responseDivContainer");
                     div.appendChild(responseDivContainer);
@@ -126,12 +132,14 @@
                             let responseDiv = document.createElement("div");
                             responseDiv.id = i + "responseDiv";
                             responseDiv.classList.add("col");
+                            responseDiv.classList.add("s12");
                             responseDiv.classList.add("m12");
                             responseDiv.classList.add("responseDiv");
 
                             let responseName = document.createElement("p");
                             responseName.textContent = data.Comments[i].Responses[x].ResponderFirstName + " " + data.Comments[i].Responses[x].ResponderLastName;
                             responseName.classList.add("col");
+                            responseName.classList.add("s12");
                             responseName.classList.add("m12");
                             responseName.classList.add("responseName");
                             responseDiv.appendChild(responseName);
@@ -139,6 +147,7 @@
                             let response = document.createElement("p");
                             response.textContent = data.Comments[i].Responses[x].ResponderComment;
                             response.classList.add("col");
+                            response.classList.add("s12");
                             response.classList.add("m12");
                             response.classList.add("response");
                             responseDiv.appendChild(response);
@@ -153,6 +162,7 @@
                     replyInput.id = i + "replyInput";
                     $(replyInput).attr("placeholder", "Reply Here:");
                     replyInput.classList.add("col");
+                    replyInput.classList.add("s12");
                     replyInput.classList.add("m12");
                     replyInput.classList.add("replyInput");
                     div.appendChild(replyInput);
@@ -164,6 +174,7 @@
             for(i in data.Tags){
                 let tag = document.createElement("div");
                 tag.classList.add("col");
+                tag.classList.add("s12");
                 tag.classList.add("m6");
                 // tag.classList.add("offset-m1")
                 tag.classList.add("center-align");

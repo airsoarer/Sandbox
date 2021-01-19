@@ -2,6 +2,12 @@ body {
     padding-bottom: 100px !important;
 }
 
+@media screen and (max-width: 601px){
+    .contain {
+        margin-top: 5px !important;
+    }
+}
+
 #author {
     margin-top: 0px !important;
 }

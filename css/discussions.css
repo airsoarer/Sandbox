@@ -8,6 +8,21 @@ input {
     box-shadow: 1px 2px 5px #8f8f8f !important;
 }
 
+@media screen and (max-width: 601px){
+    #search {
+        padding-left: 2px !important;
+        margin-top: 10px !important;
+    }
+
+    .tagDiv {
+        margin-bottom: 5px;
+    }
+
+    .searchType {
+        margin-top: 20px !important;
+    }
+}
+
 #search {
     margin-top: 100px;
 }
@@ -23,15 +38,15 @@ input {
     font-size: 22px !important;
 }
 
-.nav ul li button {
+.nav ul li button, .sidenav li button {
     border: none;
     background-color: transparent;
-    font-size: 22px;
+    font-size: 22px !important;;
     font-weight: 200;
     margin-top: 2px;
 }
 
-.nav ul li button::after {
+.nav ul li button::after, .sidenav li button::after{
     content: " ";
     margin-top: 6px !important;
     display: block;
@@ -41,7 +56,7 @@ input {
     transition: width .5s;
 }
 
-.nav ul li button:hover::after {
+.nav ul li button:hover::after, .sidenav li button:hover::after {
     /* width: 100%; */
     width: 100%;
 }
@@ -173,6 +188,7 @@ input {
     border: none;
     text-align: left;
     background-color: transparent;
+    margin-bottom: 5px;
 }
 
 .postTitle:active, .postTitle:focus, .questionTitle:active, .questionTitle:focus {

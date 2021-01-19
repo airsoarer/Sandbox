@@ -35,8 +35,9 @@
 
             let div = document.createElement("div");
             div.classList.add("col");
-            div.classList.add("m12")
-            div.classList.add("postDiv")
+            div.classList.add("s12");
+            div.classList.add("m12");
+            div.classList.add("postDiv");
             div.classList.add(key + "div");
             div.id = key;
 
@@ -45,6 +46,7 @@
             title.textContent = data.Title;
             // title.href = "../html/post.html?uid=" + key;
             title.classList.add("col");
+            title.classList.add("s12");
             title.classList.add("m12");
             title.classList.add("postTitle");
             div.appendChild(title);
@@ -57,12 +59,19 @@
             div.appendChild(author);
 
             let description = document.createElement("p");
-            let truncated = data.Description.split(" ").splice(0, 60).join(" ");
+            let width = $(window).width();
+            let truncated = ""
+            if(width < 601){
+                truncated = data.Description.split(" ").splice(0, 30).join(" ");
+            }else{
+                truncated = data.Description.split(" ").splice(0, 60).join(" ");
+            }
             if(truncated != data.Description){
                 truncated = truncated + "..."
             }
             description.textContent = truncated;
             description.classList.add("col");
+            description.classList.add("s12");
             description.classList.add("m12");
             description.classList.add("description");
             div.appendChild(description);
@@ -70,12 +79,14 @@
             let tagContainer = document.createElement("div");
             tagContainer.classList.add("tagContainer");
             tagContainer.classList.add("col");
+            tagContainer.classList.add("s12");
             tagContainer.classList.add("m12");
             div.appendChild(tagContainer);
 
             for(i in data.Tags){
                 let tagDiv = document.createElement("div");
                 tagDiv.classList.add("col");
+                tagDiv.classList.add("s12");
                 tagDiv.classList.add("m2");
                 tagDiv.classList.add("tagDiv");
                 tagContainer.appendChild(tagDiv);
@@ -102,6 +113,7 @@
 
             let div = document.createElement("div");
             div.classList.add("col");
+            div.classList.add("s12");
             div.classList.add("m12")
             div.classList.add("postDiv")
             div.classList.add(key + "div");
@@ -113,6 +125,7 @@
             title.textContent = data.Title;
             // title.href = "../html/question.html?uid=" + key;
             title.classList.add("col");
+            title.classList.add("s12");
             title.classList.add("m12");
             // title.classList.add("postTitle");
             title.classList.add("questionTitle");
@@ -121,17 +134,25 @@
             let author = document.createElement("h6");
             author.textContent = data.AuthorFName + " " + data.AuthorLName + " | Date Posted: " + data.CreationDate + " | Views: " + data.Views;
             author.classList.add("col");
+            author.classList.add("s12");
             author.classList.add("m12")
             author.classList.add("author");
             div.appendChild(author);
 
             let description = document.createElement("p");
-            let truncated = data.Description.split(" ").splice(0, 60).join(" ");
+            let width = $(window).width();
+            let truncated = ""
+            if(width < 601){
+                truncated = data.Description.split(" ").splice(0, 30).join(" ");
+            }else{
+                truncated = data.Description.split(" ").splice(0, 60).join(" ");
+            }
             if(truncated != data.Description){
                 truncated = truncated + "..."
             }
             description.textContent = truncated;
             description.classList.add("col");
+            description.classList.add("s12");
             description.classList.add("m12");
             description.classList.add("description");
             div.appendChild(description);
@@ -139,6 +160,7 @@
             let tagContainer = document.createElement("div");
             tagContainer.classList.add("tagContainer");
             tagContainer.classList.add("col");
+            tagContainer.classList.add("s12");
             tagContainer.classList.add("m12");
             div.appendChild(tagContainer);
 
@@ -146,6 +168,7 @@
                 let tagDiv = document.createElement("div");
                 tagDiv.classList.add("col");
                 tagDiv.classList.add("m2");
+                tagDiv.classList.add("s12");
                 tagDiv.classList.add("tagDiv");
                 tagContainer.appendChild(tagDiv);
                 
