@@ -26,6 +26,7 @@
 
         let temp = url.split("uid=");
         url = temp[1];
+        console.log(temp);
         console.log(url);
 
         firebase.database().ref("Questions/" + url).on("value", (snapshot) => {
@@ -188,7 +189,7 @@
         $(document.body).on("click", ".upvoteBtn", upvote);
         $(document.body).on("click", ".replyBtn", reply);
         $("#makeComment").on("click", makeComment);
-        $("#logout").on("click", logout);
+        $(".logout").on("click", logout);
     }
 
     function reply(){

@@ -196,7 +196,7 @@
         $(document.body).on("click", ".upvoteBtn", upvote);
         $(document.body).on("click", ".replyBtn", reply);
         $("#makeComment").on("click", makeComment);
-        $("#logout").on("click", logout);
+        $(".logout").on("click", logout);
     }
 
     function reply(){

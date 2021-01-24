@@ -21,125 +21,263 @@
             if(user){
                 uid = user.uid;
             }
-        }).then(() => {
+        });
+
+        setTimeout(() => {
             firebase.database().ref("Users/Teachers/" + uid + "/Posts/PostKeyArray").on("value", (snapshot) => {
                 let data = snapshot.val();
-                console.log(data);
-            });
-        })
-
-        firebase.database().ref("Posts").on("child_added", (snapshot) => {
-            let data = snapshot.val();
-            let key = snapshot.key;
-
-            let div = document.createElement("div");
-            div.classList.add("col");
-            div.classList.add("m12")
-            div.classList.add("postDiv")
-            div.classList.add(key + "div");
-            div.id = key;
-
-            let title = document.createElement("a");
-            title.id = key;
-            title.textContent = data.Title;
-            title.href = "../html/post.html?uid=" + key;
-            title.classList.add("col");
-            title.classList.add("m12");
-            title.classList.add("postTitle");
-            div.appendChild(title);
-
-            let description = document.createElement("p");
-            let truncated = data.Description.split(" ").splice(0, 30).join(" ");
-            if(truncated != data.Description){
-                truncated = truncated + "..."
-            }
-            description.textContent = truncated;
-            description.classList.add("col");
-            description.classList.add("m12");
-            description.classList.add("description");
-            div.appendChild(description);
-
-            let tagContainer = document.createElement("div");
-            tagContainer.classList.add("tagContainer");
-            tagContainer.classList.add("col");
-            tagContainer.classList.add("m12");
-            div.appendChild(tagContainer);
-
-            $(".posts").append(div);
-        });
-
-        firebase.database().ref("Questions").on("child_added", (snapshot) => {
-            let data = snapshot.val();
-            let key = snapshot.key;
-
-            let div = document.createElement("div");
-            div.classList.add("col");
-            div.classList.add("m12")
-            div.classList.add("postDiv")
-            div.classList.add(key + "div");
-            $(div).css("border-left-color", "#6B474B");
-            div.id = key;
-
-            let title = document.createElement("button");
-            title.id = key;
-            title.textContent = data.Title;
-            // title.href = "../html/question.html?uid=" + key;
-            title.classList.add("col");
-            title.classList.add("m12");
-            // title.classList.add("postTitle");
-            title.classList.add("questionTitle");
-            div.appendChild(title);
-
-            let author = document.createElement("h6");
-            author.textContent = data.AuthorFName + " " + data.AuthorLName + " | Date Posted: " + data.CreationDate + " | Views: " + data.Views;
-            author.classList.add("col");
-            author.classList.add("m12")
-            author.classList.add("author");
-            div.appendChild(author);
-
-            let description = document.createElement("p");
-            let truncated = data.Description.split(" ").splice(0, 60).join(" ");
-            if(truncated != data.Description){
-                truncated = truncated + "..."
-            }
-            description.textContent = truncated;
-            description.classList.add("col");
-            description.classList.add("m12");
-            description.classList.add("description");
-            div.appendChild(description);
-
-            let tagContainer = document.createElement("div");
-            tagContainer.classList.add("tagContainer");
-            tagContainer.classList.add("col");
-            tagContainer.classList.add("m12");
-            div.appendChild(tagContainer);
-
-            for(i in data.Tags){
-                let tagDiv = document.createElement("div");
-                tagDiv.classList.add("col");
-                tagDiv.classList.add("m2");
-                tagDiv.classList.add("tagDiv");
-                tagContainer.appendChild(tagDiv);
-                
-                let p = document.createElement("p");
-                let tag;
-                if(data.Tags[i].includes("_")){
-                    let temp = data.Tags[i].split("_");
-
-                    tag = temp[0] + " " + temp[1];
-                    p.textContent = tag;
+                if(data.length === 1){
+                    $("#noPosts").css("display", "block")
                 }else{
-                    p.textContent = data.Tags[i];
+                    $("#noPosts").css("display", "none");
+                    for(let i = 1; i < data.length; i++){
+                        firebase.database().ref("Posts/" + data[i]).on("value", (snapshot) => {
+                            let data = snapshot.val();
+                            let key = snapshot.key;
+                
+                            let div = document.createElement("div");
+                            div.classList.add("col");
+                            div.classList.add("m12")
+                            div.classList.add("postDiv")
+                            div.classList.add(key + "div");
+                            div.id = key;
+                
+                            let title = document.createElement("a");
+                            title.id = key;
+                            title.textContent = data.Title;
+                            title.href = "../html/post.html?uid=" + key;
+                            title.classList.add("col");
+                            title.classList.add("m10");
+                            title.classList.add("postTitle");
+                            div.appendChild(title);
+    
+                            // Edit Button ==================================================
+    
+                            // let editBtn = document.createElement("button");
+                            // editBtn.id = key + "edit";
+                            // editBtn.classList.add("col");
+                            // editBtn.classList.add("m1");
+                            // editBtn.classList.add("postEdit");
+                            // div.appendChild(editBtn);
+    
+                            // let editIcon = document.createElement("i");
+                            // editIcon.textContent = "edit";
+                            // editIcon.classList.add("material-icons");
+                            // editIcon.classList.add("small");
+                            // editBtn.appendChild(editIcon);
+    
+                            // Delete Button ============================================
+    
+                            let deleteBtn = document.createElement("button");
+                            deleteBtn.id = key + "delete";
+                            // $(deleteBtn).attr("data_target", key + "deleteModal");
+                            deleteBtn.classList.add("modal-trigger");
+                            deleteBtn.classList.add("col");
+                            deleteBtn.classList.add("m1");
+                            deleteBtn.classList.add("offset-m1");
+                            deleteBtn.classList.add("postDelete");
+                            div.appendChild(deleteBtn);
+    
+                            let deleteIcon = document.createElement("i");
+                            deleteIcon.textContent = "delete";
+                            deleteIcon.classList.add("material-icons");
+                            deleteIcon.classList.add("small");
+                            deleteBtn.appendChild(deleteIcon);
+    
+                            // Comfirm Delete ==============================================
+    
+                            let confirm = document.createElement("button");
+                            confirm.textContent = "Comfirm";
+                            confirm.id = key + "comfirm";
+                            confirm.classList.add("col");
+                            confirm.classList.add("m2");
+                            confirm.classList.add("comfirmBtn");
+                            div.appendChild(confirm);
+    
+                            // Description =======================================================
+                
+                            let description = document.createElement("p");
+                            let truncated = data.Description.split(" ").splice(0, 30).join(" ");
+                            if(truncated != data.Description){
+                                truncated = truncated + "..."
+                            }
+                            description.textContent = truncated;
+                            description.classList.add("col");
+                            description.classList.add("m12");
+                            description.classList.add("description");
+                            div.appendChild(description);
+                
+                            let tagContainer = document.createElement("div");
+                            tagContainer.classList.add("tagContainer");
+                            tagContainer.classList.add("col");
+                            tagContainer.classList.add("m12");
+                            div.appendChild(tagContainer);
+                
+                            $(".posts").append(div);
+                        });
+                    }
                 }
-                tagDiv.appendChild(p);
-            }
+            });
 
-            $(".questions").append(div);
-        });
+            // Questions =======================================================
+
+            firebase.database().ref("Users/Teachers/" + uid + "/Questions/QuestionKeyArray").on("value", (snapshot) => {
+                let data = snapshot.val();
+                console.log(data);
+    
+                if(data.length === 1){
+                    $("#noQuestions").css("display", "block")
+                }else{
+                    $("#noQuestions").css("display", "none");
+                    for(let i = 1; i < data.length; i++){
+                        console.log(data[i]);
+                        firebase.database().ref("Questions/" + data[i]).on("value", (snapshot) => {
+                            let data = snapshot.val();
+                            let key = snapshot.key;
+                
+                            let div = document.createElement("div");
+                            div.classList.add("col");
+                            div.classList.add("m12")
+                            div.classList.add("postDiv");
+                            div.classList.add("questionDiv")
+                            div.classList.add(key + "div");
+                            div.id = key;
+                
+                            let title = document.createElement("a");
+                            title.id = key;
+                            title.textContent = data.Title;
+                            title.href = "../html/post.html?uid=" + key;
+                            title.classList.add("col");
+                            title.classList.add("m10");
+                            title.classList.add("questionTitle");
+                            div.appendChild(title);
+    
+                            // Edit Button ==================================================
+    
+                            // let editBtn = document.createElement("button");
+                            // editBtn.id = key + "edit";
+                            // editBtn.classList.add("col");
+                            // editBtn.classList.add("m1");
+                            // editBtn.classList.add("postEdit");
+                            // div.appendChild(editBtn);
+    
+                            // let editIcon = document.createElement("i");
+                            // editIcon.textContent = "edit";
+                            // editIcon.classList.add("material-icons");
+                            // editIcon.classList.add("small");
+                            // editBtn.appendChild(editIcon);
+    
+                            // Delete Button ============================================
+    
+                            let deleteBtn = document.createElement("button");
+                            deleteBtn.id = key + "delete";
+                            // $(deleteBtn).attr("data_target", key + "deleteModal");
+                            deleteBtn.classList.add("modal-trigger");
+                            deleteBtn.classList.add("col");
+                            deleteBtn.classList.add("m1");
+                            deleteBtn.classList.add("offset-m1");
+                            deleteBtn.classList.add("postDelete");
+                            div.appendChild(deleteBtn);
+    
+                            let deleteIcon = document.createElement("i");
+                            deleteIcon.textContent = "delete";
+                            deleteIcon.classList.add("material-icons");
+                            deleteIcon.classList.add("small");
+                            deleteBtn.appendChild(deleteIcon);
+    
+                            // Comfirm Delete ==============================================
+    
+                            let confirm = document.createElement("button");
+                            confirm.textContent = "Comfirm";
+                            confirm.id = key + "comfirm";
+                            confirm.classList.add("col");
+                            confirm.classList.add("m2");
+                            confirm.classList.add("questionComfirmBtn");
+                            div.appendChild(confirm);
+    
+                            // Description =======================================================
+                
+                            let description = document.createElement("p");
+                            let truncated = data.Description.split(" ").splice(0, 30).join(" ");
+                            if(truncated != data.Description){
+                                truncated = truncated + "..."
+                            }
+                            description.textContent = truncated;
+                            description.classList.add("col");
+                            description.classList.add("m12");
+                            description.classList.add("description");
+                            div.appendChild(description);
+                
+                            let tagContainer = document.createElement("div");
+                            tagContainer.classList.add("tagContainer");
+                            tagContainer.classList.add("col");
+                            tagContainer.classList.add("m12");
+                            div.appendChild(tagContainer);
+                
+                            $(".questions").append(div);
+                        });
+                    }
+                }
+            });
+        }, 1000);
 
         $("#postSearch").on("click", post);
         $("#questionSearch").on("click", question);
-        $("#logout").on("click", logout);
+        $(document.body).on("click", ".postDelete", showComfirm);
+        $(document.body).on("click", ".comfirmBtn", deletePost);
+        $(document.body).on("click", ".questionComfirmBtn", deleteQuestion);
+        $(".logout").on("click", logout);
+        $(".sidenav").sidenav();
+        $('.modal').modal();
+    }
+
+    function deleteQuestion(){
+        let id = $(this).attr("id");
+        let temp = id.split("comfirm");
+        id = temp[0];
+
+        firebase.database().ref("Questions/" + id).remove();
+        firebase.database().ref("Users/Teachers/" + uid + "/Questions").child("QuestionKeyArray").transaction((arr) => {
+            for(i in arr){
+                if(arr[i] === id){
+                    arr.splice(i, 1);
+                    break;
+                }
+            }
+
+            return arr;
+        })
+
+        $("#" + id).css("display", "none");
+    }
+
+    function deletePost(){
+        let id = $(this).attr("id");
+        let temp = id.split("comfirm");
+        id = temp[0];
+
+        firebase.database().ref("Posts/" + id).remove();
+        firebase.database().ref("Users/Teachers/" + uid + "/Posts").child("PostKeyArray").transaction((arr) => {
+            for(i in arr){
+                if(arr[i] === id){
+                    arr.splice(i, 1);
+                    break;
+                }
+            }
+
+            return arr;
+        })
+
+        $("#" + id).css("display", "none");
+    }
+
+    function showComfirm(){
+        let id = $(this).attr("id");
+        let temp = id.split("delete");
+        id = temp[0];
+
+        $(this).css("display", "none");
+        $("#" + id + "comfirm").css("display", "block");
     }
 
     function logout(){

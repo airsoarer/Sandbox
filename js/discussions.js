@@ -194,7 +194,7 @@
         $(document.body).on("click", ".postTitle", updatePostViews);
         $(document.body).on("click", ".questionTitle", updateQuestionViews);
         $(document.body).on("click", ".tag", tag);
-        $("#logout").on("click", logout);
+        $(".logout").on("click", logout);
     }
 
     function updateQuestionViews(){
@@ -266,6 +266,7 @@
     }
 
     function logout(){
+        console.log("Working");
         firebase.auth().signOut().then(() => {
             location.replace("../html/home.html");
         });

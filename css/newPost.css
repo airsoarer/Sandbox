@@ -16,6 +16,27 @@ textarea {
     border: none;
 }
 
+hr {
+    display: none;
+}
+
+@media screen and (max-width: 601px){
+    h3 {
+        margin-top: 10px !important;;
+    }
+
+    hr {
+        margin-top: 25px;
+        margin-bottom: 25px;
+        border-color: #EA5566;
+    }
+
+    #postTitle, #tagInput {
+        padding-left: 2px !important;
+        margin-top: 10px !important;
+    }
+}
+
 #post {
     background-color: #EA5566;
     color: white;

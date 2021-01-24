@@ -25,56 +25,68 @@
 </head>
 <body>
     <div class="wrapper">
-        <div class="row nav center-align">
+        <ul id="slide-out" class="sidenav">
+            <li class="col s12" style="padding-left: 20px;" id="title"><h2>SANDBOX</h2></li>
+            <li class="col s12"><a href="discussions.html">Discussions</a></li>
+            <li class="col s12"><a href="howto.html">How-To</a></li>
+            <li class="col s12"><a href="myposts.html">My Posts</a></li>
+            <li class="col s12"><a href="profile.html">Profile</a></li>
+            <li class="col s12"><button class="logout">Logout</button></li>
+        </ul>
+        <button id="sidenav" data-target="slide-out" class="col s1 offset-s1 sidenav-trigger hide-on-med-and-up"><i class="material-icons small">menu</i></button>
+        <div class="row nav hide-on-small-only center-align">
             <ul>
                 <li class="col m4 offset-m1 left-align" id="title"><h2>SANDBOX</h2></li>
                 <li class="col m2" style="padding-top: 48px"><a href="discussions.html">Discussions</a></li>
                 <li class="col m1" style="padding-top: 48px"><a href="howto.html">How-To</a></li>
                 <li class="col m1" style="padding-top: 48px"><a href="myposts.html">My Posts</a></li>
                 <li class="col m1" style="padding-top: 48px"><a href="profile.html">Profile</a></li>
-                <li class="col m1" style="padding-top: 48px"><button id="logout">Logout</button></li>
+                <li class="col m1" style="padding-top: 48px"><button class="logout">Logout</button></li>
             </ul>
         </div>
         <div class="row search">
-            <h3 class="col m5 offset-m1">Create a Discussion</h3>
-            <button class="searchType col m2 offset-m1" id="post">Posts</buttons>
-            <button class="searchType col m2" id="question">Question</button>
+            <h3 class="col s12 m5 offset-m1">Create a Discussion</h3>
+            <button class="searchType col s10 offset-s1 m2 offset-m1" id="post">Posts</buttons>
+            <button class="searchType col s10 offset-s1 m2" id="question">Question</button>
         </div>
         <div class="row post">
-            <div class="col m10 offset-m1">
-                <div class="col m7">
-                    <input class="col m12" placeholder="Title of Post" type="text" id="postTitle">
-                    <textarea class="col m12" name="" placeholder="Description of Post" id="postDescription"></textarea>
+            <div class="col s12 m10 offset-m1">
+                <div class="col s12 m7">
+                    <input class="col s12 m12" placeholder="Title of Post" type="text" id="postTitle">
+                    <textarea class="col s12 m12" name="" placeholder="Description of Post" id="postDescription"></textarea>
                 </div>
-                <div class="col m4 offset-m1 tagLocation">
-                    <input placeholder="Tags, lowercase" type="text" id="tagInput" class="col m12" data-target="">
-                    <ul id="postDropdown" class='col m12 dropdown'></ul>
+                <hr class="col s10 offset-s1 show-on-small-only">
+                <div class="col s12 m4 offset-m1 tagLocation">
+                    <input placeholder="Tags, lowercase" type="text" id="tagInput" class="col s12 m12" data-target="">
+                    <ul id="postDropdown" class='col s12 m12 dropdown'></ul>
                     <!-- <span class="col m12 tempSpan">Tags will appear here</span> -->
                 </div>
-                <div class="col m12">
-                    <button class="col m3" id="createPost">Create Post</button>
+                <div class="col s12 m12">
+                    <button class="col s10 offset-s1 m3" id="createPost">Create Post</button>
                 </div>
             </div>
         </div>
         <div class="row question">
-            <div class="col m10 offset-m1">
-                <div class="col m7">
-                    <input class="col m12" placeholder="Title of Question" type="text" id="questionTitle">
-                    <textarea class="col m12" name="" placeholder="Description of Question" id="questionDescription"></textarea>
+            <div class="col s12 m10 offset-m1">
+                <div class="col s12 m7">
+                    <input class="col s12 m12" placeholder="Title of Question" type="text" id="questionTitle">
+                    <textarea class="col s12 m12" name="" placeholder="Description of Question" id="questionDescription"></textarea>
                 </div>
-                <div class="col m4 offset-m1">
+                <hr class="col s10 offset-s1 hide-on-med-and-up">
+                <div class="col s12 m4 offset-m1">
                     <h4 style="margin-top: 0px !important; margin-bottom: 5px !important;">Response Type:</h4>
                     <span style="font-size: 15px;">Select who you would like to respond to your question:</span>
-                    <div class="col m12 btns">
-                        <button id="teacher" class="col m3 responseTypeBtn">Teacher</button>
-                        <button id="student" class="col m3 offset-m1 responseTypeBtn">Student</button>
-                        <button id="studentTeacher" class="col m4 offset-m1 responseTypeBtn">Teacher & Student</button>
+                    <div class="col s12 m12 btns">
+                        <button id="teacher" class="col s10 offset-s1 m3 responseTypeBtn">Teacher</button>
+                        <button id="student" class="col s10 offset-s1 m3 offset-m1 responseTypeBtn">Student</button>
+                        <button id="studentTeacher" class="col s10 offset-s1 m4 offset-m1 responseTypeBtn">Teacher & Student</button>
                     </div>
-                    <input placeholder="Tags, press enter after each tag" type="text" id="questionTagInput" class="col m12">
-                    <ul id="questionDropdown" class='col m12 dropdown'></ul>
+                    <hr class="col s10 offset-s1 hide-on-med-and-up">
+                    <input placeholder="Tags, press enter after each tag" type="text" id="questionTagInput" class="col s12 m12">
+                    <ul id="questionDropdown" class='col s12 m12 dropdown'></ul>
                 </div>
-                <div class="col m12">
-                    <button class="col m3" id="createQuestion">Create Question</button>
+                <div class="col s12 m12">
+                    <button class="col s10 offset-s1 m3" id="createQuestion">Create Question</button>
                 </div>
             </div>
         </div>

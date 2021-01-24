@@ -109,7 +109,7 @@
         $("#question").on("click", question);
         $("#createPost").on("click", createPost);
         $("#createQuestion").on("click", createQuestion);
-        $("#logout").on("click", logout);
+        $(".logout").on("click", logout);
 
         $("#teacher").on("click", teacher);
         $('#student').on("click", student);
@@ -356,9 +356,12 @@
                                     Type:"QUESTION",
                                     Responses:null
                                 }).then(() => {
-                                        firebase.database().ref("Users/" + type + "/" + uid + "/Questions").set([key]).then(() => {
-                                        location.replace("../html/post.html?id=" + key);
-                                    });
+                                    firebase.database().ref("Users/" + type + "/" + uid + "/Questions").child("QuestionKeyArray").transaction((arr) => {
+                                        arr.push(key);
+                                        return arr;
+                                    }).then(() => {
+                                        location.replace("../html/question.html?uid=" + key);
+                                    })
                                 })
                             })
                         }
