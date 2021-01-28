@@ -1,8 +1,95 @@
+textarea {
+    height: 300px;
+}
+
+label {
+    font-size: 18px;
+    font-weight: 700 !important;
+}
+
+#photoUploaded {
+    margin-top: 6px;
+    color: #EA5566;
+    display: none;
+}
+
+#file {
+    height: 0px !important;
+    margin-bottom: 50px;
+    margin-top: 5px;
+    border: none;
+
+    background-color: transparent;
+    color: black;
+    transition-duration: none;
+    box-shadow: none !important;
+}
+
+.editable {
+    display: none;
+    margin-top: 50px;
+}
+
+.editable input {
+    padding-left: 0px !important;
+}
+
 .picture img {
     height: 100px;
+}
+
+.editBtn {
+    border: none;
+    background-color: transparent;
+    cursor:pointer;
+}
+
+.editBtn:focus {
+    background-color: transparent;
+}
+
+.editBtn:hover {
+    color: #EA5566;
+}
+
+#updateBio, #updatePhoto {
+    height: 25px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    border: none;
+    background-color: transparent;
+    font-size: 13px;
+
+    background-color: white;
+    color: black;
+    transition-duration: .5s;
+    box-shadow: 1px 2px 5px #8f8f8f;
+}
+
+#updatePhoto {
+    margin-top: 2.5px;
+}
+
+#updateBio:hover, #updatePhoto:hover {
+    background-color: #EA5566;
+    color: white;
+    transition-duration: .5s;
+    box-shadow: 1px 10px 5px #8f8f8f;
 }
 
 .contain {
     margin-top: 50px;
     display: none;
 }
+
+.edit {
+    margin-top: 10px;
+    border: none;
+    background-color: transparent;
+}
+
+.edit:hover {
+    color: #EA5566;
+    transition-duration: .2s;
+}
+

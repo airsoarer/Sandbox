@@ -20,33 +20,130 @@
         firebase.auth().onAuthStateChanged((user) => {
             if(user){
                 uid = user.uid;
-                loadData();
+                firebase.database().ref("Users/Teachers/" + uid + "/Info").on("value", (snapshot) => {
+                    let data = snapshot.val();
+        
+                    $("#name").text(data.FirstName + " " + data.LastName);
+                    $("#subject").text(data.Subject);
+                    $("#school").text(data.School);
+                    $("#bio").text(data.Bio);
+        
+                    if(data.Subject === ""){
+                        $("#subject").text("No Teaching Subject");
+                    }
+        
+                    if(data.School === ""){
+                        $("#school").text("No School");
+                    }
+        
+                    if(data.Bio === ""){
+                        $("#bio").text("No information for Bio");
+                    }
+                })
+
+                firebase.storage().ref("Users/" + uid).child("ProfilePhoto").getDownloadURL().then((url) => {
+                    $("#profilePicture").attr("src", url);
+                    $(".picture").css("display", "block");
+                })
+                
+                $(".contain").css("display", "block");
             }
+        })
+
+        $("#editFname").keyup((e) => {
+            if(e.keyCode === 13){
+                updateFname();
+            }
+        });
+        $("#editLname").keyup((e) => {
+            if(e.keyCode === 13){
+                updateLname();
+            }
+        });
+        $("#editSubject").keyup((e) => {
+            if(e.keyCode === 13){
+                updateSubject();
+            }
+        });
+        $("#editSchool").keyup((e) => {
+            if(e.keyCode === 13){
+                updateSchool();
+            }
+        });
+        
+        $("#updateBio").on("click", updateBio);
+        $("#updatePhoto").on("click", updatePhoto);
+        $(".editBtn").on("click", openEdit);
+    }
+
+    function openEdit(){
+        $(".editable").toggle();
+    }
+
+    function updatePhoto(){
+        let file = $("#file").prop("files")[0];
+        firebase.storage().ref("Users/" + uid + "/ProfilePhoto").put(file).then((snapshot) => {
+            console.log(snapshot.downloadURL);
+           $("#photoUploaded").css("display", "block");
         })
     }
 
-    function loadData(){
-        firebase.database().ref("Users/Teachers/" + uid + "/Info").on("value", (snapshot) => {
-            let data = snapshot.val();
+    function updateFname(){
+        let data = $("#editFname").val();
 
-            $("#name").text(data.FirstName + " " + data.LastName);
-            $("#subject").text(data.Subject);
-            $("#school").text(data.School);
-            $("#bio").text(data.Bio);
-
-            if(data.Subject === ""){
-                $("#subject").text("No Teaching Subject");
-            }
-
-            if(data.School === ""){
-                $("#school").text("No School");
-            }
-
-            if(data.Bio === ""){
-                $("#bio").text("No information for Bio");
-            }
+        firebase.database().ref("Users/Teachers/" + uid + "/Info").child("FirstName").transaction((info) => {
+            info = data;
+            return data;
         })
 
-        $(".contain").css("display", "block");
+        $("#editFname").val(" ");
+        $("#editFname").attr("placeholder", "First Name");
+    }
+    
+    function updateLname(){
+        let data = $("#editLname").val();
+        
+        firebase.database().ref("Users/Teachers/" + uid + "/Info").child("LastName").transaction((info) => {
+            info = data;
+            return data;
+        })
+
+        $("#editLname").val(" ");
+        $("#editLname").attr("placeholder", "Last Name");
+    }
+
+    function updateSubject(){
+        let data = $("#editSubject").val();
+        
+        firebase.database().ref("Users/Teachers/" + uid + "/Info").child("Subject").transaction((info) => {
+            info = data;
+            return data;
+        })
+
+        $("#editSubject").val(" ");
+        $("#editSubject").attr("placeholder", "Subject");
+    }
+
+    function updateSchool(){
+        let data = $("#editSchool").val();
+        
+        firebase.database().ref("Users/Teachers/" + uid + "/Info").child("School").transaction((info) => {
+            info = data;
+            return data;
+        })
+
+        $("#editSchool").val(" ");
+        $("#editSchool").attr("placeholder", "School");
+    }
+
+    function updateBio(){
+        let data = $("#editBio").val();
+        
+        firebase.database().ref("Users/Teachers/" + uid + "/Info").child("Bio").transaction((info) => {
+            info = data;
+            return data;
+        })
+
+        $("#editBio").val(" ");
     }
 })();
