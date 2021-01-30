@@ -104,7 +104,7 @@
                 tagDiv.appendChild(p);
             }
 
-            $(".posts").append(div);
+            $(".posts").prepend(div);
         });
 
         firebase.database().ref("Questions").on("child_added", (snapshot) => {
@@ -190,11 +190,66 @@
 
         $("#postSearch").on("click", post);
         $("#questionSearch").on("click", question);
+        $("#search").keyup((e) => {
+            if($("#search").val() === ""){
+                $(".postDiv").css("display", "block");
+                $(".questionDiv").css("display", "block");
+            }
+            if(e.keyCode === 13){
+                search();
+            }
+        })
 
         $(document.body).on("click", ".postTitle", updatePostViews);
         $(document.body).on("click", ".questionTitle", updateQuestionViews);
         $(document.body).on("click", ".tag", tag);
         $(".logout").on("click", logout);
+    }
+
+    function search(){
+        let input = $("#search").val();
+        input = input.toLowerCase();
+        let splitInput = input.split(" ");
+
+        firebase.database().ref("Posts").on("child_added", (snapshot) => {
+            let data = snapshot.val();
+            let key = snapshot.key;
+            let title = data.Title;
+            title = title.toLowerCase();
+            let titleSplit = title.split(" ");
+            
+            for(i in splitInput){
+                for(x in titleSplit){
+                    // console.log(splitInput[i], titleSplit[x]);
+                    if(splitInput[i] === titleSplit[x]){
+                        $("#" + key).css("display", "block");
+                        break;
+                    }else{
+                        $("#" + key).css("display", "none");
+                    }
+                }
+            }
+        })
+
+        firebase.database().ref("Questions").on("child_added", (snapshot) => {
+            let data = snapshot.val();
+            let key = snapshot.key;
+            let title = data.Title;
+            title = title.toLowerCase();
+            let titleSplit = title.split(" ");
+            
+            for(i in splitInput){
+                for(x in titleSplit){
+                    // console.log(splitInput[i], titleSplit[x]);
+                    if(splitInput[i] === titleSplit[x]){
+                        $("#" + key).css("display", "block");
+                        break;
+                    }else{
+                        $("#" + key).css("display", "none");
+                    }
+                }
+            }
+        })
     }
 
     function updateQuestionViews(){
@@ -218,51 +273,66 @@
     function tag(){
         let tag = $(this).text();
 
-        // if(data.Tags[i].includes("_")){
-        //     let temp = data.Tags[i].split("_");
-        //     data.Tags[i] = temp[0] + " " + temp[1];
-        // }
+        if(tagFilterList.includes(tag)){
+            $(this).css("color", "black");
+            $(this).css("background-color", "white");
 
-        firebase.database().ref("Posts").on("child_added", (snapshot) => {
-            let data = snapshot.val();
-            let key = snapshot.key;
+            let index = tagFilterList.indexOf(tag);
+            tagFilterList.splice(index, 1);
 
-            if(!tagFilterList.includes(tag)){
-                tagFilterList.push(tag);
+            $(".postDiv").css("display", "block");
 
-                // console.log("Add: " + tagFilterList);
+            firebase.database().ref("Posts").on("child_added", (snapshot) => {
+                let data = snapshot.val();
+                let key = snapshot.key;
+
+                let tempTagList = [];
+                
                 for(i in data.Tags){
-                    if(data.Tags[i].includes("_")){
-                        let temp = data.Tags[i].split("_");
-                        data.Tags[i] = temp[0] + " " + temp[1];
+                    let dataTags = data.Tags[i];
+                    if(dataTags.includes("_")){
+                        let temp = dataTags.split("_");
+                        dataTags = temp[0] + " " + temp[1];
                     }
 
-                    console.log(tag + " " + data.Tags[i]);
-                    if(tag === data.Tags[i]){
-                        $(this).css("color", "white");
-                        $(this).css("background-color", "#EA5566");
-                    }
+                    tempTagList.push(dataTags);
                 }
 
-            }else{
-                tagFilterList.splice(tagFilterList.indexOf(tag), 1);
-                // console.log("Remove: " + tagFilterList);
-                for(i in data.Tags){
-                    if(data.Tags[i].includes("_")){
-                        let temp = data.Tags[i].split("_");
-                        data.Tags[i] = temp[0] + " " + temp[1];
-                    }
-
-                    if(tag === data.Tags[i]){
-                        $(this).css("color", "black");
-                        $(this).css("background-color", "white");
+                for(i in tagFilterList){
+                    if(tempTagList.includes(tagFilterList[i])){
+                        console.log(tempTagList, tagFilterList[i]);
+                        $("#" + key).css("display", "block");
+                    }else{
+                        $("#" + key).css("display", "none");
                     }
                 }
-            }
-
-            // console.log(tagFilterList);
-            // console.log("---------------------")
-        });
+            })
+        }else{
+            $(this).css("color", "white");
+            $(this).css("background-color", "#EA5566");
+            
+            firebase.database().ref("Posts").on("child_added", (snapshot) => {
+                let data = snapshot.val();
+                let key = snapshot.key;
+                
+                for(i in data.Tags){
+                    let dataTags = data.Tags[i];
+                    if(dataTags.includes("_")){
+                        let temp = dataTags.split("_");
+                        dataTags = temp[0] + " " + temp[1];
+                    }
+    
+                    if(dataTags === tag){
+                        $("#" + key).css("display", "block");
+                        break;
+                    }else{
+                        $("#" + key).css("display", "none");
+                    }
+                }
+            })
+    
+            tagFilterList.push(tag);
+        }
     }
 
     function logout(){

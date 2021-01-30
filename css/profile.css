@@ -7,6 +7,20 @@ label {
     font-weight: 700 !important;
 }
 
+@media screen and (max-width: 601px){
+    label {
+        text-align: left;
+    }
+
+    .contain {
+        text-align: center;
+    }
+
+    .editBtn {
+        margin-top: 23px;
+    }
+}
+
 #photoUploaded {
     margin-top: 6px;
     color: #EA5566;
