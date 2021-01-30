@@ -281,8 +281,36 @@
             tagFilterList.splice(index, 1);
 
             $(".postDiv").css("display", "block");
+            $(".questionDiv").css("display", "block");
 
             firebase.database().ref("Posts").on("child_added", (snapshot) => {
+                let data = snapshot.val();
+                let key = snapshot.key;
+
+                let tempTagList = [];
+                
+                for(i in data.Tags){
+                    let dataTags = data.Tags[i];
+                    if(dataTags.includes("_")){
+                        let temp = dataTags.split("_");
+                        dataTags = temp[0] + " " + temp[1];
+                    }
+
+                    tempTagList.push(dataTags);
+                }
+
+                for(i in tagFilterList){
+                    if(tempTagList.includes(tagFilterList[i])){
+                        console.log(tempTagList, tagFilterList[i]);
+                        $("#" + key).css("display", "block");
+                    }else{
+                        $("#" + key).css("display", "none");
+                    }
+                }
+            })
+
+            // Questions ===============================================
+            firebase.database().ref("Questions").on("child_added", (snapshot) => {
                 let data = snapshot.val();
                 let key = snapshot.key;
 
@@ -312,6 +340,28 @@
             $(this).css("background-color", "#EA5566");
             
             firebase.database().ref("Posts").on("child_added", (snapshot) => {
+                let data = snapshot.val();
+                let key = snapshot.key;
+                
+                for(i in data.Tags){
+                    let dataTags = data.Tags[i];
+                    if(dataTags.includes("_")){
+                        let temp = dataTags.split("_");
+                        dataTags = temp[0] + " " + temp[1];
+                    }
+    
+                    if(dataTags === tag){
+                        $("#" + key).css("display", "block");
+                        break;
+                    }else{
+                        $("#" + key).css("display", "none");
+                    }
+                }
+            })
+
+            // Questions =================================================
+
+            firebase.database().ref("Questions").on("child_added", (snapshot) => {
                 let data = snapshot.val();
                 let key = snapshot.key;
                 
