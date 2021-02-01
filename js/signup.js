@@ -141,10 +141,10 @@
                 Status:"TEACHER",
                 Bio:""
             }).then(() => {
-                firebase.database().ref("Users/Teachers/" + UID + "Posts").set({
+                firebase.database().ref("Users/Teachers/" + UID + "/Posts").set({
                     PostKeyArray: [""]
                 }).then(() => {
-                    firebase.databse().ref("Users/Teachers/" + UID + "Questions").set({
+                    firebase.database().ref("Users/Teachers/" + UID + "/Questions").set({
                         QuestionKeyArray: [""]
                     })
                     location.replace("profile.html?first_signup");
