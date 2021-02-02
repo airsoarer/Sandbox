@@ -74,6 +74,7 @@
         $("#updateBio").on("click", updateBio);
         $("#updatePhoto").on("click", updatePhoto);
         $(".editBtn").on("click", openEdit);
+        $(".logout").on("click", logout);
     }
 
     function openEdit(){
@@ -145,5 +146,12 @@
         })
 
         $("#editBio").val(" ");
+    }
+
+    function logout(){
+        console.log("Working");
+        firebase.auth().signOut().then(() => {
+            location.replace("../html/home.html");
+        });
     }
 })();
