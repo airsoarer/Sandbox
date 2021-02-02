@@ -23,6 +23,10 @@ input {
     }
 }
 
+#noPosts, #noQuestions {
+    display: none;
+}
+
 #search {
     margin-top: 100px;
 }

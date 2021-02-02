@@ -27,11 +27,18 @@
             tagBtn.textContent = data;
 
             $(".tags").append(tagBtn);
+            
+            $("#noPosts").css("display", "block");
+            $("#noQuestions").css("display", "block");
         })
 
         firebase.database().ref("Posts").on("child_added", (snapshot) => {
             let data = snapshot.val();
             let key = snapshot.key;
+
+            if(snapshot.exists()){
+                $("#noPosts").css("display", "none");
+            }
 
             let div = document.createElement("div");
             div.classList.add("col");
@@ -110,6 +117,10 @@
         firebase.database().ref("Questions").on("child_added", (snapshot) => {
             let data = snapshot.val();
             let key = snapshot.key;
+
+            if(snapshot.exists()){
+                $("#noQuestions").css("display", "none");
+            }
 
             let div = document.createElement("div");
             div.classList.add("col");
