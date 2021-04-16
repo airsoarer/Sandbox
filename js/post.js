@@ -32,6 +32,7 @@
             
             $("#postTitle").text(data.Title);
             $("#author").text(data.AuthorFName + " " + data.AuthorLName);
+            $("#author").attr("href", "../html/viewProfile.html?uid=" + data.AuthorUID);
             $("#description").text(data.Description);
 
             $("#datePosted").text("Date Posted: " + data.CreationDate);
@@ -49,7 +50,7 @@
                     div.classList.add("m12");
                     div.classList.add("commentBox");
 
-                    let name = document.createElement("p");
+                    let name = document.createElement("a");
                     name.textContent = data.Comments[i].CommenterFirstName + " " + data.Comments[i].CommenterLastName;
                     name.classList.add("col");
                     name.classList.add("s12");

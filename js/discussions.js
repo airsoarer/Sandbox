@@ -58,7 +58,8 @@
             title.classList.add("postTitle");
             div.appendChild(title);
 
-            let author = document.createElement("h6");
+            let author = document.createElement("a");
+            author.href = "../html/viewProfile.html?uid=" + data.AuthorUID;
             author.textContent = data.AuthorFName + " " + data.AuthorLName + " | Date Posted: " + data.CreationDate + " | Views: " + data.Views;
             author.classList.add("col");
             author.classList.add("m12")
@@ -142,7 +143,8 @@
             title.classList.add("questionTitle");
             div.appendChild(title);
 
-            let author = document.createElement("h6");
+            let author = document.createElement("a");
+            author.href = "../html/viewProfile.html?uid=" + data.AuthorUID;
             author.textContent = data.AuthorFName + " " + data.AuthorLName + " | Date Posted: " + data.CreationDate + " | Views: " + data.Views;
             author.classList.add("col");
             author.classList.add("s12");

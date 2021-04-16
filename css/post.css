@@ -8,8 +8,19 @@ body {
     }
 }
 
-#author {
+#author, .name {
     margin-top: 0px !important;
+    color: grey;
+}
+
+#author:hover, .name:hover {
+    transition-duration: .2s;
+    color: #EA5566;
+}
+
+#author::after, .name::after {
+    content: none;
+    display: none;
 }
 
 #description {

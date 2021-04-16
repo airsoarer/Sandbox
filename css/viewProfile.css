@@ -1,0 +1,24 @@
+#name {
+    margin-bottom: 0px !important;
+}
+
+#email, #subject, #school {
+    font-size: 13px;
+}
+
+#email {
+    margin-top: 0px !important;
+}
+
+#bio {
+    padding-top: 12px;
+    font-size: 18px;
+}
+
+.posts {
+    padding-top: 20px;
+}
+
+.postContain {
+    padding-top: 20px;
+}

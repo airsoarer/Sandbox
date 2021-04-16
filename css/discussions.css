@@ -222,3 +222,18 @@ input {
     display: none;
 }
 
+.author{
+    margin-top: 0px !important;
+    color: grey;
+}
+
+.author:hover {
+    transition-duration: .2s;
+    color: #EA5566;
+}
+
+.author::after {
+    content: none;
+    display: none;
+}
+
