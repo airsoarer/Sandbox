@@ -37,6 +37,12 @@ hr {
     }
 }
 
+#postFiles, #questionFiles {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    margin-top: 40px;
+}
+
 #post {
     background-color: #EA5566;
     color: white;

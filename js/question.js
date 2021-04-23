@@ -184,6 +184,31 @@
 
                 $(".tags").append(tag);
             }
+
+            for(i = 0; i < data.NumberOfFiles; i++){
+                let a = document.createElement("a");
+                firebase.storage().ref("Users/" + uid + "/Questions/" + url + "/file" + i).getDownloadURL().then((url) => {a.href = url;})
+
+                a.target = "_blank";
+                a.classList.add("col");
+                a.classList.add("s6");
+                a.classList.add("m3");
+                a.classList.add("fileLink");
+
+                // let icon = document.createElement("i");
+                // icon.classList.add("material-icons");
+                // icon.classList.add("small")
+                // icon.classList.add("fileIcon");
+                // icon.textContent = "description";
+                // a.prepend(icon);
+
+                let span = document.createElement("span");
+                span.textContent = "File " + (i + 1);
+                a.append(span);
+
+
+                $(".files").append(a);
+            }
         });
 
         $(document.body).on("click", ".upvoteBtn", upvote);

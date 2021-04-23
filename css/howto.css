@@ -1,0 +1,24 @@
+@keyframes titleIn {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: .5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.title {
+    padding-top: 30px !important;
+    animation-name: titleIn;
+    animation-duration: 2s;
+}
+
+.subtitle {
+    animation-name: titleIn;
+    animation-duration: 2s;
+}

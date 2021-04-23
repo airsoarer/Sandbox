@@ -237,3 +237,28 @@ input {
     display: none;
 }
 
+.feedback {
+    background-color: white;
+    position:fixed;
+    bottom: 20px;
+    box-shadow: 2px 2px #8f8f8f;
+}
+
+.feedback:hover {
+    background-color: #EA5566;
+    transition-duration: .2s;
+}
+
+.feedback a {
+    color: black;
+}
+
+.feedback a:hover {
+    color: white;
+}
+
+.feedback a::after {
+    content: " ";
+    display: none;
+}
+

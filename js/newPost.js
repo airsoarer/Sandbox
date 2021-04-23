@@ -258,6 +258,9 @@
     function createPost(){
         let title = $("#postTitle").val();
         let description = $("#postDescription").val();
+        let files = $("#postFiles").prop("files");
+        let numberOfFiles = files.length;
+        let key = "";
 
         if(title.length === 0){
             $("#postTitle").css("border-bottom-color", "red");
@@ -284,7 +287,7 @@
                             console.log(uid);
                             firebase.database().ref("Users/" + type + "/" + uid + "/Info").on("value", (snapshot) => {
                                 let data = snapshot.val();
-                                let key = firebase.database().ref("Posts/").push().getKey();
+                                key = firebase.database().ref("Posts/").push().getKey();
                                 firebase.database().ref("Posts/" + key).set({
                                     Title:title,
                                     Description:description,
@@ -292,17 +295,26 @@
                                     AuthorLName:data.LastName,
                                     AuthorUID:uid,
                                     Tags:postTags,
+                                    NumberOfFiles:numberOfFiles,
                                     Views:0,
                                     CreationDate:today,
                                     Type:"POST",
                                     Responses:null
+                                }).then(() => {
+                                    if(files.length >= 1){
+                                        for(i = 0; i < files.length; i++){
+                                            firebase.storage().ref("Users/" + uid + "/Posts/" + key + "/file" + i).put(files[i]);
+                                        }                                        
+                                    }
                                 }).then(() => {
                                     firebase.database().ref("Users/" + type + "/" + uid + "/Posts").child("PostKeyArray").transaction((PostKeyArray) => {
                                         PostKeyArray.push(key);
                                         return PostKeyArray;
                                     })
                                     //     firebase.database().ref("Users/" + type + "/" + uid + "/Posts").set([key]).then(() => {
-                                    location.replace("../html/post.html?uid=" + key);
+                                        setTimeout(() => {
+                                            location.replace("../html/post.html?uid=" + key);
+                                        }, 500);
                                     // });
                                 })
                             })
@@ -316,6 +328,9 @@
     function createQuestion(){
         let title = $("#questionTitle").val();
         let description = $("#questionDescription").val();
+        let files = $("#questionFiles").prop("files");
+        let numberOfFiles = files.length;
+        let key = "";
 
         if(title.length === 0){
             $("#questionTitle").css("border-bottom-color", "red");
@@ -342,13 +357,14 @@
                             console.log(uid);
                             firebase.database().ref("Users/" + type + "/" + uid + "/Info").on("value", (snapshot) => {
                                 let data = snapshot.val();
-                                let key = firebase.database().ref("Questions/").push().getKey();
+                                key = firebase.database().ref("Questions/").push().getKey();
                                 firebase.database().ref("Questions/" + key).set({
                                     Title:title,
                                     Description:description,
                                     AuthorFName:data.FirstName,
                                     AuthorLName:data.LastName,
                                     AuthorUID:uid,
+                                    NumberOfFiles:numberOfFiles,
                                     Tags:questionTags,
                                     ResponseType:responseType,
                                     Views:0,
@@ -356,11 +372,19 @@
                                     Type:"QUESTION",
                                     Responses:null
                                 }).then(() => {
+                                    if(files.length >= 1){
+                                        for(i = 0; i < files.length; i++){
+                                            firebase.storage().ref("Users/" + uid + "/Questions/" + key + "/file" + i).put(files[i]);
+                                        }                                        
+                                    }
+                                }).then(() => {
                                     firebase.database().ref("Users/" + type + "/" + uid + "/Questions").child("QuestionKeyArray").transaction((arr) => {
                                         arr.push(key);
                                         return arr;
                                     }).then(() => {
-                                        location.replace("../html/question.html?uid=" + key);
+                                        setTimeout(() => {
+                                            location.replace("../html/question.html?uid=" + key);
+                                        }, 800);
                                     })
                                 })
                             })
